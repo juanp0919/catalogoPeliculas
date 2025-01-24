@@ -22,7 +22,7 @@ public class ServicioPeliculasArchivo implements IServicioPelicula{
             else{
                 var salida = new PrintWriter(new FileWriter(archivo));
                 salida.close();
-                JOptionPane.showMessageDialog(null, "Se ha creado el archivo");
+                System.out.println("Se ha creado el archivo");
         }
         }catch (Exception e)
         {
@@ -59,21 +59,18 @@ public class ServicioPeliculasArchivo implements IServicioPelicula{
 
     @Override
     public void agregarPelicula(Pelicula pelicula) {
-    boolean anexar = false;
-    var archivo = new File(NOMBRE_ARCHIVO);
-    try {
-    //Se revisa si el archivo existe
-        anexar = archivo.exists();
-        var salida = new PrintWriter(new FileWriter(archivo, anexar));
-        JOptionPane.showMessageDialog(null, pelicula);
-        salida.close();
-        JOptionPane.showMessageDialog(null, "Se agrego correctamente la pelicula: " + pelicula);
+        boolean anexar = true; // Se debe habilitar la opción de anexar al archivo
+        var archivo = new File(NOMBRE_ARCHIVO);
 
-
-    }catch (Exception e)
-    {
-        JOptionPane.showMessageDialog(null, "Ocurrio un error al agregar pelicula" + e.getMessage());
-    }
+        try {
+            // Abrir el archivo en modo de escritura, habilitando anexar
+            var salida = new PrintWriter(new FileWriter(archivo, anexar));
+            salida.println(pelicula.getNombre()); // Escribir el nombre de la película
+            salida.close(); // Cerrar el archivo
+            JOptionPane.showMessageDialog(null, "Se agregó correctamente la película: " + pelicula.getNombre());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al agregar la película: " + e.getMessage());
+        }
     }
 
     @Override

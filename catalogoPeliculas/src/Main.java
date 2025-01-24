@@ -1,6 +1,7 @@
 import servicios.ServicioPeliculaLista;
 import servicios.IServicioPelicula;
 import dominio.Pelicula;
+import servicios.ServicioPeliculasArchivo;
 
 import javax.swing.*;
 
@@ -10,7 +11,9 @@ public class Main {
         boolean salir = false;
         String opcion;
 
-        IServicioPelicula iServicioPelicula = new ServicioPeliculaLista();
+        //IServicioPelicula iServicioPelicula = new ServicioPeliculaLista();
+        IServicioPelicula iServicioPelicula = new ServicioPeliculasArchivo();
+
 
         while (!salir) {
             opcion = mostrarMenu();
