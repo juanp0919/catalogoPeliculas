@@ -34,7 +34,7 @@ public class ServicioPeliculasArchivo implements IServicioPelicula{
     public void listarPeliculas() {
     var archivo = new File(NOMBRE_ARCHIVO);
     try {
-    JOptionPane.showMessageDialog();
+    JOptionPane.showMessageDialog(null, "Listado de peliculas");
     //se abre el arcivo para leerlo
     var entrada = new BufferedReader(new FileReader(archivo));
 
@@ -100,7 +100,7 @@ public class ServicioPeliculasArchivo implements IServicioPelicula{
                 indice++;
             }
             //Se imprimen los resultados
-            if (entrada)
+            if (encontrada)
             {
                 JOptionPane.showMessageDialog(null, "pelicula " + lineaTexto + "encontrada - linea" + indice);
             }else {
