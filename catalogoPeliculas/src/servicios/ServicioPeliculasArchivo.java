@@ -59,11 +59,56 @@ public class ServicioPeliculasArchivo implements IServicioPelicula{
 
     @Override
     public void agregarPelicula(Pelicula pelicula) {
+    boolean anexar = false;
+    var archivo = new File(NOMBRE_ARCHIVO);
+    try {
+    //Se revisa si el archivo existe
+        anexar = archivo.exists();
+        var salida = new PrintWriter(new FileWriter(archivo, anexar));
+        JOptionPane.showMessageDialog(null, pelicula);
+        salida.close();
+        JOptionPane.showMessageDialog(null, "Se agrego correctamente la pelicula: " + pelicula);
 
+
+    }catch (Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ocurrio un error al agregar pelicula" + e.getMessage());
+    }
     }
 
     @Override
     public void buscarPelicula(Pelicula pelicula) {
 
+        var archivo = new File(NOMBRE_ARCHIVO);
+        try {
+            //Abrimos el archivo para la lectura linea a linea
+            var entrada = new BufferedReader(new FileReader(archivo));
+            String lineaTexto;
+            lineaTexto = entrada.readLine();
+            var indice = 1;
+            var encontrada = false;
+            var peliculaBuscar = pelicula.getNombre();
+            while (lineaTexto != null)
+            {
+                //Buscamos sin importar tipo de escritura
+                if (peliculaBuscar != null && peliculaBuscar.equalsIgnoreCase(lineaTexto))
+                {
+                    encontrada = true;
+                    break;
+                }
+                lineaTexto = entrada.readLine();
+                indice++;
+            }
+            //Se imprimen los resultados
+            if (entrada)
+            {
+                JOptionPane.showMessageDialog(null, "pelicula " + lineaTexto + "encontrada - linea" + indice);
+            }else {
+                JOptionPane.showMessageDialog(null, "la pelicula no fue encotrada");
+            }
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al buscar la pelicula" + e.getMessage());
+        }
     }
 }
